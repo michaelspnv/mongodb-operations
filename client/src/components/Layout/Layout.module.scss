@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  background-color: #000;
+}
+
+.navMenu > li {
+  display: inline;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+.navLink {
+  text-decoration: none;
+  color: #fff;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 0 50px;
+}
+
+.footer {
+  width: 100%;
+  height: 50px;
+  background-color: green;
+}

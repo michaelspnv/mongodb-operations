@@ -1,4 +1,5 @@
 const express = require("express")
+const cors = require("cors")
 const { MongoClient } = require("mongodb")
 require("dotenv").config()
 
@@ -14,24 +15,34 @@ const uri = `mongodb+srv://${username}:${password}@${clusterUrl}/?authMechanism=
 
 const client = new MongoClient(uri)
 
-app.get("/api/movies", (req, res) => {
-  async function run() {
-    try {
-      await client.connect()
+app.use(cors())
 
-      const cursor = await client
-        .db("sample_mflix")
-        .collection("movies")
-        .find({})
-        .limit(100)
-        .toArray()
+const urlencodedParser = express.urlencoded({ extended: false })
 
-      res.send(cursor)
-    } finally {
-      await client.close()
-    }
-  }
-  run().catch(console.log)
+// app.get("/api/movies", (req, res) => {
+//   async function run() {
+//     try {
+//       await client.connect()
+
+//       const cursor = await client
+//         .db("sample_mflix")
+//         .collection("movies")
+//         .find({ year: { $gt: 2014 } })
+//         .project({ _id: 0, title: 1 })
+//         .limit(100)
+//         .toArray()
+
+//       res.send(cursor)
+//     } finally {
+//       await client.close()
+//     }
+//   }
+//   run().catch(console.log)
+// })
+
+app.post("/login", urlencodedParser, (req, res) => {
+  console.log(req.body.username)
+  res.status(200).json({ message: "OK" })
 })
 
 app.listen(PORT, () => {
