@@ -19,6 +19,7 @@
   height: 400px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  margin-bottom: 50vh;
 }
 
 .field {
@@ -42,11 +43,23 @@
   }
 }
 
+.redirect {
+  display: flex;
+  width: 80%;
+  font-size: 14px;
+  margin-bottom: 20px;
+
+  & > p {
+    color: #555;
+    margin-right: 2px;
+  }
+}
+
 .button {
   width: 40%;
   height: 30px;
   font-size: 16px;
-  border: 1px solid #000;
+  border: 1px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
 

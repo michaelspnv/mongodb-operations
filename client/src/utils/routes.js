@@ -12,7 +12,7 @@ export const publicRoutes = [
   },
   {
     id: 2,
-    link: "registration",
+    link: "register",
     component: <Registration />,
   },
   {
