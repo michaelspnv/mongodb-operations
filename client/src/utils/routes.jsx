@@ -1,4 +1,5 @@
 import { Home } from "../pages/Home"
+import { RegistrationContainer } from "../hoc/RegistrationContainer"
 import { Registration } from "../pages/Registration"
 import { Login } from "../pages/Login"
 import { About } from "../pages/About"
@@ -13,7 +14,11 @@ export const publicRoutes = [
   {
     id: 2,
     link: "register",
-    component: <Registration />,
+    component: (
+      <RegistrationContainer>
+        <Registration />
+      </RegistrationContainer>
+    ),
   },
   {
     id: 3,

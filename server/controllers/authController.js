@@ -1,37 +1,14 @@
-const { MongoClient } = require("mongodb")
-require("dotenv").config()
+const AuthService = require("../services/AuthService.js")
 
-const username = process.env.MONGO_USERNAME
-const password = process.env.MONGO_PASSWORD
-const clusterUrl = process.env.MONGO_CLUSTER_URL
-const authMechanism = process.env.MONGO_AUTH_MECHANISM
-
-const uri = `mongodb+srv://${username}:${password}@${clusterUrl}/?authMechanism=${authMechanism}`
-
-const client = new MongoClient(uri)
-
-class AuthController {
-  async register(req, res) {
+module.exports = class AuthController {
+  static async register(req, res) {
     try {
-      await client.connect()
+      const response = await AuthService.register(req.body)
 
-      const { username, password } = req.body
-
-      const cursor = await client
-        .db("github-auth")
-        .collection("users")
-        .insertOne({
-          username,
-          password,
-        })
-
-      res.json(cursor)
-    } catch (error) {
-      console.log(error)
-    } finally {
-      await client.close()
+      res.json(response)
+    } catch (e) {
+      console.log(e)
+      res.sendStatus(400)
     }
   }
 }
-
-module.exports = new AuthController()
