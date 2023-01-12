@@ -3,13 +3,12 @@ import { Link } from "react-router-dom"
 import { InputField } from "../../components/InputField"
 import styles from "./Registration.module.scss"
 
-export function Registration({ registerUser }) {
+export function Registration({ registerUser, errors }) {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
     registerUser({ username, password })
   }
 
@@ -23,17 +22,24 @@ export function Registration({ registerUser }) {
           onChange={(e) => setUsername(e.target.value)}
           value={username}
         />
+
+        {errors.validationError && <p>{errors.validationError}</p>}
+
         <InputField
           id="password"
           label="Password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
+
         <div className={styles.redirect}>
           <p>Already have an account?</p>
           <Link to="/login">Log In</Link>
         </div>
+
         <input className={styles.button} type="submit" value="Sign Up" />
+
+        {errors.authError && <p>{errors.authError}</p>}
       </form>
     </div>
   )
