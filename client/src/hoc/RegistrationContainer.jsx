@@ -1,12 +1,10 @@
 import React from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { initiateNewError } from "../store/slices/authErrorsSlice"
 import { $axios } from "../http"
 
 export function RegistrationContainer({ children }) {
   const dispatch = useDispatch()
-
-  const errors = useSelector((state) => state.authErrors)
 
   const registerUser = async (userData) => {
     try {
@@ -17,6 +15,7 @@ export function RegistrationContainer({ children }) {
           initiateNewError({
             errorType: res.data.errorType,
             message: res.data.message,
+            location: res.data.location,
           })
         )
       }
@@ -27,6 +26,5 @@ export function RegistrationContainer({ children }) {
 
   return React.cloneElement(children, {
     registerUser,
-    errors,
   })
 }

@@ -3,17 +3,27 @@ import { createSlice } from "@reduxjs/toolkit"
 export const authErrorsSlice = createSlice({
   name: "authErrors",
   initialState: {
-    validationError: null,
-    authError: null,
+    validationError: {
+      message: null,
+      location: null,
+    },
+    authError: {
+      message: null,
+      location: null,
+    },
   },
   reducers: {
     initiateNewError: (state, action) => {
       switch (action.payload.errorType) {
         case "validationError":
-          state.validationError = action.payload.message
+          state.authError = {}
+          state.validationError.message = action.payload.message
+          state.validationError.location = action.payload.location
           break
         case "authError":
-          state.authError = action.payload.message
+          state.validationError = {}
+          state.authError.message = action.payload.message
+          state.authError.location = action.payload.location
       }
     },
   },

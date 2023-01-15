@@ -1,11 +1,14 @@
 import React, { useState } from "react"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { InputField } from "../../components/InputField"
 import styles from "./Registration.module.scss"
 
-export function Registration({ registerUser, errors }) {
+export function Registration({ registerUser }) {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+
+  const errors = useSelector((state) => state.authErrors)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -21,15 +24,21 @@ export function Registration({ registerUser, errors }) {
           label="Username"
           onChange={(e) => setUsername(e.target.value)}
           value={username}
+          error={
+            errors.validationError.location === "username" &&
+            errors.validationError.message
+          }
         />
-
-        {errors.validationError && <p>{errors.validationError}</p>}
 
         <InputField
           id="password"
           label="Password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
+          error={
+            errors.validationError.location === "password" &&
+            errors.validationError.message
+          }
         />
 
         <div className={styles.redirect}>
@@ -39,7 +48,9 @@ export function Registration({ registerUser, errors }) {
 
         <input className={styles.button} type="submit" value="Sign Up" />
 
-        {errors.authError && <p>{errors.authError}</p>}
+        {errors.authError && (
+          <p className={styles.error}>{errors.authError.message}</p>
+        )}
       </form>
     </div>
   )

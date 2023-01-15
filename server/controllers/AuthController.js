@@ -1,3 +1,4 @@
+const { body } = require("express-validator")
 const AuthService = require("../services/AuthService.js")
 
 module.exports = class AuthController {

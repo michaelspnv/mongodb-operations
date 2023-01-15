@@ -14,6 +14,46 @@ const client = new MongoClient(uri)
 module.exports = class AuthService {
   static async register({ username, password }) {
     try {
+      // password and username validation
+
+      let error
+
+      if (!password || password.length < 5) {
+        error = {
+          errorType: "validationError",
+          message: "Password should contain at least 5 characters.",
+          location: "password",
+        }
+      }
+
+      if (password.length > 12) {
+        error = {
+          errorType: "validationError",
+          message: "Password should not be longer than 12 charachters.",
+          location: "password",
+        }
+      }
+
+      if (!username || username.length < 5) {
+        error = {
+          errorType: "validationError",
+          message: "Username should contain at least 5 characters.",
+          location: "username",
+        }
+      }
+
+      if (username.length > 12) {
+        error = {
+          errorType: "validationError",
+          message: "Username should not be longer than 12 charachters.",
+          location: "username",
+        }
+      }
+
+      if (error) return error
+
+      // ----------
+
       await client.connect()
 
       const hash = bcrypt.hashSync(password, 7)
@@ -21,6 +61,9 @@ module.exports = class AuthService {
       const newUser = {
         username,
         hashPassword: hash,
+        dateOfRegistration: new Date().toLocaleString("ru-RU", {
+          timeZone: "Europe/Moscow",
+        }),
       }
 
       if (
