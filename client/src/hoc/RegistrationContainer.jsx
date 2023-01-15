@@ -1,6 +1,6 @@
 import React from "react"
 import { useDispatch } from "react-redux"
-import { initiateNewError } from "../store/slices/authErrorsSlice"
+import { initiateNewError } from "../store/features/authErrorsSlice"
 import { $axios } from "../http"
 
 export function RegistrationContainer({ children }) {
