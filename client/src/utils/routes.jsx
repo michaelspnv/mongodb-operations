@@ -1,6 +1,7 @@
 import { Home } from "../pages/Home"
 import { RegistrationContainer } from "../hoc/RegistrationContainer"
 import { Registration } from "../pages/Registration"
+import { LoginContainer } from "../hoc/LoginContainer"
 import { Login } from "../pages/Login"
 import { About } from "../pages/About"
 import { Movies } from "../pages/Movies"
@@ -23,7 +24,11 @@ export const publicRoutes = [
   {
     id: 3,
     link: "login",
-    component: <Login />,
+    component: (
+      <LoginContainer>
+        <Login />
+      </LoginContainer>
+    ),
   },
   {
     id: 4,
