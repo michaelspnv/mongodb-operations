@@ -1,5 +1,5 @@
 const path = require("path")
-// const Dotenv = require("dotenv-webpack")
+const Dotenv = require("dotenv-webpack")
 const HTMLWebpackPlugin = require("html-webpack-plugin")
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 
@@ -22,7 +22,7 @@ module.exports = {
       template: "./public/index.html",
     }),
     new CleanWebpackPlugin(),
-    // new Dotenv(),
+    new Dotenv(),
   ],
   devtool: "source-map",
   module: {
