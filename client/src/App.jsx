@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Routes, Route } from "react-router-dom"
 import { publicRoutes, privateRoutes } from "./utils/routes"
 import { Layout } from "./components/Layout"
@@ -8,19 +8,6 @@ import "reset-css"
 import "./App.scss"
 
 export default function App() {
-  // const [movies, setMovies] = useState([])
-  // const [loading, setLoading] = useState(false)
-
-  // const getMovies = () => {
-  //   setLoading(true)
-  //   fetch("http://localhost:3001/api/movies")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setLoading(false)
-  //       setMovies(data)
-  //     })
-  // }
-
   return (
     <>
       <Routes>

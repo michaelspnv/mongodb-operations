@@ -18,7 +18,7 @@ module.exports = class ApiService {
       const movies = client
         .db("movie_app")
         .collection("movies")
-        .find({ rating: { $lt: "8.0" } })
+        .find({ rating: { $lt: "7.0" } })
         .project({
           _id: 0,
           filmId: 1,
