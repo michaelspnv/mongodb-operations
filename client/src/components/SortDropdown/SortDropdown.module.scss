@@ -1,0 +1,14 @@
+.sortBtnLabel {
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.sortBtn {
+  width: 140px;
+  height: 30px;
+  font-size: 18px;
+
+  &:focus {
+    outline: none;
+  }
+}
