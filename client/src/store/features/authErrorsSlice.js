@@ -31,4 +31,4 @@ export const authErrorsSlice = createSlice({
 
 export const { initiateNewError } = authErrorsSlice.actions
 
-export default authErrorsSlice.reducer
+export const authErrorsReducer = authErrorsSlice.reducer

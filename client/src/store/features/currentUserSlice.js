@@ -14,4 +14,4 @@ export const currentUserSlice = createSlice({
 
 export const { createUser } = currentUserSlice.actions
 
-export default currentUserSlice.reducer
+export const currentUserReducer = currentUserSlice.reducer

@@ -9,8 +9,12 @@ export function InputField({ id, label, className, error, ...props }) {
 
   return (
     <div className={classes}>
-      {label && <label htmlFor={id}>{label}</label>}
-      <input id={id} name={id} {...props} />
+      {label && (
+        <label htmlFor={id} className={styles.label}>
+          {label}
+        </label>
+      )}
+      <input id={id} name={id} className={styles.input} {...props} />
       {error && <p className={styles.error}>{error}</p>}
     </div>
   )

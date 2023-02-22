@@ -1,45 +1,25 @@
 import React, { useState, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { fetchFilms, sortFilms } from "../../store/features/loadedFilmsSlice"
 import { SortDropdown } from "../../components/SortDropdown"
 import { MovieCard } from "../../components/MovieCard"
 import styles from "./Movies.module.scss"
 
-export function Movies({ getMovies }) {
-  const [movies, setMovies] = useState([])
-
+export function Movies() {
   const [sortFilter, setSortFilter] = useState("release date")
 
-  const loadMovies = async () => {
-    const resData = await getMovies()
+  const dispatch = useDispatch()
 
-    resData.sort((a, b) => Number(b.year) - Number(a.year))
-
-    setMovies(resData)
-  }
+  const { films, error } = useSelector((state) => state.loadedFilms)
 
   useEffect(() => {
-    try {
-      loadMovies()
-    } catch (error) {
-      console.log(error)
+    if (!films) {
+      dispatch(fetchFilms())
     }
   }, [])
 
   useEffect(() => {
-    const sortingArr = movies.slice()
-
-    switch (sortFilter) {
-      case "rating":
-        sortingArr.sort((a, b) => Number(b.rating) - Number(a.rating))
-        setMovies(sortingArr)
-        break
-      case "popularity":
-        sortingArr.sort((a, b) => b.ratingVoteCount - a.ratingVoteCount)
-        setMovies(sortingArr)
-        break
-      default:
-        sortingArr.sort((a, b) => Number(b.year) - Number(a.year))
-        setMovies(sortingArr)
-    }
+    dispatch(sortFilms({ sortFilter }))
   }, [sortFilter])
 
   return (
@@ -49,14 +29,18 @@ export function Movies({ getMovies }) {
         <SortDropdown setSortFilter={setSortFilter} />
       </div>
       <div className={styles.grid}>
-        {movies.map((movie) => (
-          <MovieCard
-            key={movie.filmId}
-            nameRu={movie.nameRu}
-            rating={movie.rating}
-            posterUrl={movie.posterUrl}
-          />
-        ))}
+        {films && error ? (
+          <p>{error}</p>
+        ) : (
+          films.map((film) => (
+            <MovieCard
+              key={film.filmId}
+              nameRu={film.nameRu}
+              rating={film.rating}
+              posterUrl={film.posterUrl}
+            />
+          ))
+        )}
       </div>
     </>
   )
