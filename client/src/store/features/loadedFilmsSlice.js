@@ -25,12 +25,15 @@ export const fetchFilms = createAsyncThunk(
 export const loadedFilmsSlice = createSlice({
   name: "loadedFilms",
   initialState: {
-    films: [],
+    films: {
+      fetched: [],
+      filtered: [],
+    },
     error: null,
   },
   reducers: {
     sortFilms: (state, action) => {
-      const sortingData = state.films.slice()
+      const sortingData = state.films.filtered.slice()
 
       const { sortFilter } = action.payload
 
@@ -38,26 +41,37 @@ export const loadedFilmsSlice = createSlice({
         case "rating":
           sortingData.sort((a, b) => Number(b.rating) - Number(a.rating))
 
-          state.films = sortingData
+          state.films.filtered = sortingData
 
           break
         case "popularity":
           sortingData.sort((a, b) => b.ratingVoteCount - a.ratingVoteCount)
 
-          state.films = sortingData
+          state.films.filtered = sortingData
 
           break
         case "release date":
           sortingData.sort((a, b) => Number(b.year) - Number(a.year))
 
-          state.films = sortingData
+          state.films.filtered = sortingData
       }
+    },
+    findFilms: (state, action) => {
+      const sortingData = state.films.fetched.slice()
+
+      const { searchFilter } = action.payload
+
+      const result = sortingData.filter((film) =>
+        film.nameRu.toLowerCase().includes(searchFilter.trim().toLowerCase())
+      )
+
+      state.films.filtered = result
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchFilms.fulfilled, (state, action) => {
-      state.films = action.payload
-
+      state.films.fetched = action.payload
+      state.films.filtered = state.films.fetched
       state.error = null
     })
     builder.addCase(fetchFilms.rejected, (state, action) => {
@@ -66,6 +80,6 @@ export const loadedFilmsSlice = createSlice({
   },
 })
 
-export const { sortFilms } = loadedFilmsSlice.actions
+export const { sortFilms, findFilms } = loadedFilmsSlice.actions
 
 export const loadedFilmsReducer = loadedFilmsSlice.reducer

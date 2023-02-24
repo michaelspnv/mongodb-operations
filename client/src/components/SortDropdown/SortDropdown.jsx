@@ -9,7 +9,7 @@ export function SortDropdown({ setSortFilter }) {
   }
 
   return (
-    <>
+    <div>
       <label htmlFor="sort" className={styles.sortBtnLabel}>
         Sort by:
       </label>
@@ -24,6 +24,6 @@ export function SortDropdown({ setSortFilter }) {
         <option value="rating">Rating</option>
         <option value="popularity">Popularity</option>
       </select>
-    </>
+    </div>
   )
 }

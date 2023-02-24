@@ -1,7 +1,7 @@
 const ApiService = require("../services/ApiService")
 
 module.exports = class ApiController {
-  static async getMovies(req, res) {
+  static async getMovies(_, res) {
     try {
       const response = await ApiService.getMovies()
 

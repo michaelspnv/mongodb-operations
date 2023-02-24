@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { fetchFilms, sortFilms } from "../../store/features/loadedFilmsSlice"
 import { SortDropdown } from "../../components/SortDropdown"
 import { MovieCard } from "../../components/MovieCard"
+import { SearchField } from "../../components/SearchField"
 import styles from "./Movies.module.scss"
 
 export function Movies() {
@@ -10,10 +11,13 @@ export function Movies() {
 
   const dispatch = useDispatch()
 
-  const { films, error } = useSelector((state) => state.loadedFilms)
+  const {
+    films: { filtered: filteredFilms },
+    error,
+  } = useSelector((state) => state.loadedFilms)
 
   useEffect(() => {
-    if (!films) {
+    if (!filteredFilms.length) {
       dispatch(fetchFilms())
     }
   }, [])
@@ -25,14 +29,15 @@ export function Movies() {
   return (
     <>
       <h1 className={styles.title}>Best recent films</h1>
-      <div className={styles.sortBtnContainer}>
+      <div className={styles.controlsContainer}>
+        <SearchField />
         <SortDropdown setSortFilter={setSortFilter} />
       </div>
       <div className={styles.grid}>
-        {films && error ? (
+        {filteredFilms && error ? (
           <p>{error}</p>
         ) : (
-          films.map((film) => (
+          filteredFilms.map((film) => (
             <MovieCard
               key={film.filmId}
               nameRu={film.nameRu}
