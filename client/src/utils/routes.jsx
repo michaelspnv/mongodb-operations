@@ -4,8 +4,8 @@ import { Registration } from "../pages/Registration"
 import { LoginContainer } from "../hoc/LoginContainer"
 import { Login } from "../pages/Login"
 import { About } from "../pages/About"
-import { MoviesContainer } from "../hoc/MoviesContainer"
 import { Movies } from "../pages/Movies"
+import { Film } from "../pages/Film"
 
 export const publicRoutes = [
   {
@@ -42,10 +42,11 @@ export const privateRoutes = [
   {
     id: 1,
     link: "movies",
-    component: (
-      <MoviesContainer>
-        <Movies />
-      </MoviesContainer>
-    ),
+    component: <Movies />,
+  },
+  {
+    id: 2,
+    link: "movies/:filmId",
+    component: <Film />,
   },
 ]

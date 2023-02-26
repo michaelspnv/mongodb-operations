@@ -40,6 +40,7 @@ export function Movies() {
           filteredFilms.map((film) => (
             <MovieCard
               key={film.filmId}
+              filmId={film.filmId}
               nameRu={film.nameRu}
               rating={film.rating}
               posterUrl={film.posterUrl}

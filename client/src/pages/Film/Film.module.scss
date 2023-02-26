@@ -1,0 +1,88 @@
+@mixin flex-default {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  @include flex-default;
+  padding: 100px 0;
+}
+
+.filmInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 800px;
+  height: 400px;
+  font-size: 20px;
+  color: #999;
+}
+
+.mainInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 60px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.additionalInfo {
+  @include flex-default;
+}
+
+.genres {
+  @include flex-default;
+}
+
+.genre {
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+.moreInfo {
+  @include flex-default;
+
+  & > p:first-child {
+    margin-right: 20px;
+  }
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  font-size: 28px;
+  color: #fff;
+  margin-bottom: 40px;
+
+  & > p {
+    margin-right: 10px;
+  }
+
+  &--red {
+    color: #ff0000;
+  }
+
+  &--grey {
+    color: inherit;
+  }
+
+  &--green {
+    color: #00ff00;
+  }
+}
+
+.description {
+  line-height: 1.5em;
+}
+
+.poster {
+  width: 500px;
+  height: 750px;
+}

@@ -30,6 +30,7 @@ module.exports = class ApiService {
           rating: 1,
           year: 1,
           ratingVoteCount: 1,
+          filmLength: 1,
         })
 
       let result = []

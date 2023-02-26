@@ -27,7 +27,7 @@ export function Layout() {
       <div className={styles.container}>
         <Outlet />
       </div>
-      <div className={styles.footer}>123</div>
+      <div className={styles.footer}></div>
     </>
   )
 }
