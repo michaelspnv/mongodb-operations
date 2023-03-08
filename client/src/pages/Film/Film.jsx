@@ -10,19 +10,18 @@ export function Film() {
 
   const currentFilm = filtered.find((film) => film.filmId === +filmId)
 
-  const { nameRu, genres, countries, filmLength, year, rating, posterUrl } =
-    currentFilm
+  const { nameRu, genres, filmLength, year, rating, posterUrl } = currentFilm
 
   const getFilmLenInMins = (filmLenInHours) => {
-    const hours = filmLenInHours.charAt(1)
-    const minutes = filmLenInHours.slice(3)
+    const hours = Number(filmLenInHours.charAt(1))
+    const minutes = Number(filmLenInHours.slice(3))
 
-    return +hours * 60 + +minutes + " min"
+    return hours * 60 + minutes + " min"
   }
 
   const getRatingColor = (rating) => {
-    if (+rating < 5) return "red"
-    if (+rating < 7) return "grey"
+    if (Number(rating) < 5) return "red"
+    if (Number(rating) < 7) return "grey"
     return "green"
   }
 

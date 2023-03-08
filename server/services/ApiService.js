@@ -22,7 +22,6 @@ module.exports = class ApiService {
         .project({
           _id: 0,
           filmId: 1,
-          countries: 1,
           genres: 1,
           nameEn: 1,
           nameRu: 1,

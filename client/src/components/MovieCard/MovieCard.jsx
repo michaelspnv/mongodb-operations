@@ -23,7 +23,7 @@ export function MovieCard({ filmId, nameRu, rating, posterUrl }) {
             <div className={styles.movieTitle}>
               <p className={styles.movieName}>{nameRu}</p>
             </div>
-            <hr />
+            <div className={styles.divider} />
             <div className={styles.movieContent}>
               <div className={styles.ratingBox}>
                 <p className={styles.movieRating}>{rating}</p>

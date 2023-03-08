@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useLayoutEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { fetchFilms, sortFilms } from "../../store/features/loadedFilmsSlice"
 import { SortDropdown } from "../../components/SortDropdown"
@@ -16,13 +16,13 @@ export function Movies() {
     error,
   } = useSelector((state) => state.loadedFilms)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!filteredFilms.length) {
       dispatch(fetchFilms())
     }
   }, [])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(sortFilms({ sortFilter }))
   }, [sortFilter])
 
